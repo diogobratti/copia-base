@@ -1,4 +1,5 @@
 const i18n = require('../i18n/texts');
+const { InvalidArgumentError } = require('../error/error');
 
 module.exports = {
   notNullStringField: (value, name) => {

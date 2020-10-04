@@ -11,7 +11,7 @@ class User {
     this.email = user.email;
     this.passwordHash = user.passwordHash;
 
-    this.valida();
+    this.validate();
   }
 
   async add() {
