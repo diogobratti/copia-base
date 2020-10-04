@@ -33,14 +33,14 @@ passport.use(
   new LocalStrategy(
     {
       usernameField: 'email',
-      passwordField: 'senha',
+      passwordField: 'password',
       session: false
     },
     async (email, password, done) => {
       try {
         const user = await User.findByEmail(email);
         verifyUser(user);
-        await verifyPassword(password, user.senhaHash);
+        await verifyPassword(password, user.passwordHash);
 
         done(null, user);
       } catch (error) {

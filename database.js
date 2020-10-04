@@ -10,11 +10,11 @@ const POSTS_SCHEMA = `
   `;
 
 const USUARIOS_SCHEMA = `
-  CREATE TABLE IF NOT EXISTS usuarios (
+  CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    nome VARCHAR(40) NOT NULL,
+    name VARCHAR(40) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
-    senhaHash VARCHAR(255) NOT NULL
+    passwordHash VARCHAR(255) NOT NULL
   )
   `;
 
@@ -23,7 +23,7 @@ db.serialize(() => {
   db.run(POSTS_SCHEMA);
   db.run(USUARIOS_SCHEMA);
 
-  db.each('SELECT * FROM usuarios', (err, usuario) => {
+  db.each('SELECT * FROM users', (err, usuario) => {
     console.log('Users: ');
     console.log(usuario);
   });

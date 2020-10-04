@@ -4,20 +4,20 @@ const { InvalidArgumentError } = require('../error/error');
 module.exports = {
   notNullStringField: (value, name) => {
     if (typeof value !== 'string' || value === 0)
-      throw new InvalidArgumentError(`É necessário preencher o campo ${name}!`);
+      throw new InvalidArgumentError(i18n.FIELD_REQUIRED_ERRO(name));
   },
 
   minimumSizeField: (value, name, minimum) => {
     if (value.length < minimum)
       throw new InvalidArgumentError(
-        `O campo ${name} precisa ser maior que ${minimum} caracteres!`
+        i18n.MINIMUM_SIZE_FIELD_ERROR(name,minimum)
       );
   },
 
   maximumSizeField: (value, name, maximum) => {
     if (value.length > maximum)
       throw new InvalidArgumentError(
-        `O campo ${name} precisa ser menor que ${maximum} caracteres!`
+        i18n.MAXIMUM_SIZE_FIELD_ERROR(name,maximum)
       );
   }
 };
