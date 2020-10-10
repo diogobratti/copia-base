@@ -4,7 +4,7 @@ const { InvalidArgumentError } = require('../error/error');
 module.exports = {
   notNullStringField: (value, name) => {
     if (typeof value !== 'string' || value === 0)
-      throw new InvalidArgumentError(i18n.FIELD_REQUIRED_ERRO(name));
+      throw new InvalidArgumentError(i18n.FIELD_REQUIRED_ERROR(name));
   },
 
   minimumSizeField: (value, name, minimum) => {

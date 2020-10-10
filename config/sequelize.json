@@ -1,0 +1,37 @@
+{
+  "define": {
+    "underscored": false,
+    "charset": "utf8",
+    "dialectOptions": {
+      "collate": "utf8_general_ci"
+    },
+    "timestamps": true,
+    "createdAt": "createdAt",
+    "updatedAt": "updatedAt",
+    "deletedAt": "deletedAt",
+    "createdBy": "createdBy",
+    "updatedBy": "updatedBy",
+    "deletedBy": "deletedBy"
+  },
+  "development": {
+    "username": "sequelize",
+    "password": "Secret#123456",
+    "database": "sequelize",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": null,
+    "database": "database_test",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": null,
+    "database": "database_production",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

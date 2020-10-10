@@ -5,8 +5,8 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const { InvalidArgumentError } = require('../error/error');
-const User = require('../user/user-model');
-const blacklist = require('../../redis/blacklist-actions');
+const model = require('../models');
+const blacklist = require('../redis/blacklist-actions');
 const i18n = require('../i18n/texts')
 
 function verifyUser(user) {
@@ -38,9 +38,11 @@ passport.use(
     },
     async (email, password, done) => {
       try {
-        const user = await User.findByEmail(email);
+        const user = await model.User.findOne({ where : { email : email }});
         verifyUser(user);
-        await verifyPassword(password, user.passwordHash);
+        
+        // await verifyPassword(password, user.getDataValue('hashedPassword'));
+        await verifyPassword(password, user.hashedPassword);
 
         done(null, user);
       } catch (error) {
@@ -56,7 +58,7 @@ passport.use(
             try {
               await existsTokenInBlacklist(token);
               const payload = jwt.verify(token,process.env.JWT_KEY);
-              const user = await User.findById(payload.id);
+              const user = await model.User.findByPk(payload.id);
               done(null,user, { token: token });
             } catch (error) {
               done(error);

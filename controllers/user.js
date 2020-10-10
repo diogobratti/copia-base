@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
-const User = require('./user-model');
+const database = require('./../models');
 const { InvalidArgumentError, InternalServerError } = require('../error/error');
-const blacklist = require('../../redis/blacklist-actions');
+const blacklist = require('../redis/blacklist-actions');
 
 function createJWTToken(user){
   const payload = {
@@ -17,14 +17,13 @@ module.exports = {
     const { name, email, password } = req.body;
 
     try {
-      const user = new User({
-        name,
-        email
-      });
-
-      await user.addPassword(password);
-
-      await user.add();
+      
+      const user = await database.User.create({
+                                      name: name,
+                                      email: email,
+                                      username: email,
+                                      hashedPassword: password,
+                                    });
 
       res.status(201).json();
     } catch (error) {
@@ -55,14 +54,14 @@ module.exports = {
   },
 
   list: async (req, res) => {
-    const users = await User.list();
+    const users = await database.User.findAll();
     res.json(users);
   },
 
   delete: async (req, res) => {
-    const user = await User.findById(req.params.id);
+    const user = await database.User.findByPk(req.params.id);
     try {
-      await user.delete();
+      await user.destroy(user);
       res.status(200).send();
     } catch (error) {
       res.status(500).json({ error: error });
