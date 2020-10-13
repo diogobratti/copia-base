@@ -14,14 +14,14 @@ function createJWTToken(user){
 
 module.exports = {
   add: async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, username, password } = req.body;
 
     try {
       
       const user = await database.User.create({
                                       name: name,
                                       email: email,
-                                      username: email,
+                                      username: username,
                                       hashedPassword: password,
                                     });
 
