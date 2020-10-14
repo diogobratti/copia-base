@@ -1,27 +1,17 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Addresses', {
+    await queryInterface.createTable('Roles', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      street: {
-        type: Sequelize.STRING
-      },
-      number: {
-        type: Sequelize.STRING
-      },
-      complement: {
-        type: Sequelize.STRING
-      },
-      zip: {
-        type: Sequelize.STRING
-      },
-      main: {
-        type: Sequelize.BOOLEAN
+      label: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       },
       createdAt: {
         allowNull: false,
@@ -36,8 +26,13 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+    await queryInterface.bulkInsert('Roles', [{
+      label: 'admin',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }]);
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Addresses');
+    await queryInterface.dropTable('Roles');
   }
 };

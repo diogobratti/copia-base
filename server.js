@@ -1,6 +1,5 @@
 require('dotenv').config();
 const app = require('./app');
-const model = require('./models');
 require('./redis/blacklist')
 
 

@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.City.belongsTo(models.State);
+      models.City.hasMany(models.Address);
     }
   };
   City.init({

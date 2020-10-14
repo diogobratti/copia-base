@@ -1,7 +1,10 @@
 'use strict';
+
+const brazilianStates = require('../data/brazilianStatesAndCities.json');
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Users', {
+    await queryInterface.createTable('States', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -12,29 +15,19 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      email: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      username: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        unique: true,
-      },
-      hashedPassword: {
+      acronym: {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      roleId: {
+      countryId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-          model: 'Roles',
+          model: 'Countries',
           key: 'id'
         },
-        // onUpdate: 'cascade',
-        // onDelete: 'cascade'
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
       },
       createdAt: {
         allowNull: false,
@@ -49,17 +42,19 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
-    await queryInterface.bulkInsert('Users', [{
-      name: 'Diogo Bratti',
-      email: 'dbratti@gmail.com',
-      username: 'dbratti',
-      hashedPassword: '123456789',
-      roleId: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    }]);
+    let states = [];
+    await brazilianStates["estados"].forEach(state => 
+        states.push({
+          name: state.nome,
+          acronym: state.sigla,
+          countryId: 1,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        })
+      );
+    await queryInterface.bulkInsert('States', states);
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Users');
+    await queryInterface.dropTable('States');
   }
 };

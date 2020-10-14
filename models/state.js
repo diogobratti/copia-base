@@ -11,13 +11,18 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      models.State.hasMany(models.City);
+      models.State.belongsTo(models.Country);
     }
   };
   State.init({
     name: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+    },
+    acronym: {
+      type: DataTypes.STRING,
+      allowNull: false,
     }
   }, {
     sequelize,

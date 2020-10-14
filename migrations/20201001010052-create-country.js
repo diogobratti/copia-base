@@ -1,7 +1,7 @@
 'use strict';
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Roles', {
+    await queryInterface.createTable('Countries', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -11,6 +11,12 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: true,
+      },
+      acronym: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true,
       },
       createdAt: {
         allowNull: false,
@@ -19,15 +25,20 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      deletedAt: {
+        allowNull: true,
+        type: Sequelize.DATE
       }
     });
-    await queryInterface.bulkInsert('Roles', [{
-      name: 'admin',
+    await queryInterface.bulkInsert('Countries', [{
+      name: 'Brasil',
+      acronym: 'BR',
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Roles');
+    await queryInterface.dropTable('Countries');
   }
 };
