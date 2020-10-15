@@ -5,7 +5,7 @@ const path = require('path');
 const basename = path.basename(__filename);
 const routes = {};
 const controllers = require('../controllers');
-const { authMiddleware } = require('../auth')
+const { middleware, authorization } = require('../auth')
 
 module.exports = app => {
 
@@ -29,15 +29,31 @@ fileNames.forEach(file => {
     .forEach(file => {
       const model = file.slice(0,-3);
 
+      const adminAccess = [middleware.bearer, authorization.isAdmin];
+      let adminOrMyAccess = [];
+      if(model === 'user'){
+        adminOrMyAccess = [middleware.bearer,
+                                authorization.isAdmin,
+                                authorization.isMyUser,];
+      } else if (model === 'address'){
+        adminOrMyAccess = [middleware.bearer,
+                                authorization.isAdmin,
+                                authorization.isMyAddress,];
+      } else {
+        adminOrMyAccess = [middleware.bearer,
+                                authorization.isAdmin,];
+      }
+
       app
         .route('/' + model)
-          .post(authMiddleware.bearer,controllers[model].add)
-          .get(authMiddleware.bearer,controllers[model].list);
+          .post(adminAccess,controllers[model].add)
+          .get(adminAccess,controllers[model].list);
 
       app
         .route('/' + model + '/:id')
-          .delete(authMiddleware.bearer,controllers[model].delete)
-          .get(authMiddleware.bearer,controllers[model].findByPk);
+          .delete(adminOrMyAccess,controllers[model].delete)
+          .get(adminOrMyAccess,controllers[model].findByPk)
+          .put(adminOrMyAccess,controllers[model].update);
 
     });
 

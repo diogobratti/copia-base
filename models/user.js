@@ -17,6 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.User.belongsTo(models.Role);
+      models.User.hasMany(models.Address);
     }
   };
   User.init({
@@ -34,8 +35,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
-    hashedPassword: {
+    password: {
       type: DataTypes.STRING(64),
+      allowNull: true,
       is: /^[0-9a-f]{64}$/i
     }
   }, {
@@ -44,14 +46,14 @@ module.exports = (sequelize, DataTypes) => {
     paranoid: true,
   });
   function hashPasswordHook (instance, options) {
-    if (!instance.changed('hashedPassword')) return ;
-    const password = instance.getDataValue('hashedPassword');
+    if (!instance.changed('password')) return ;
+    const password = instance.getDataValue('password');
     validation.notNullStringField(password, 'password');
     validation.minimumSizeField(password, 'password', 8);
     validation.maximumSizeField(password, 'password', 64);
     return bcrypt
       .hash(password, generalConfig.bcryptRounds)
-      .then(hash => (instance.setDataValue('hashedPassword', hash)));
+      .then(hash => (instance.setDataValue('password', hash)));
   }
   User.beforeCreate(hashPasswordHook);
   User.beforeUpdate(hashPasswordHook);

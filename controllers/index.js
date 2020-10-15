@@ -19,6 +19,13 @@ fs
   Reading all models and inserting CRUD routes 
   ***************************/    
 
+  const standardColumns = [
+    'id',
+    'createdAt',
+    'updatedAt',
+    'deletedAt'
+  ];
+
 
   fs
     .readdirSync(__dirname + "/../models")
@@ -30,18 +37,52 @@ fs
       const Model = model.charAt(0).toUpperCase() + model.slice(1);
 
 
-      //TODO: Include add operation. I wasn't able so far because I couldn't handle an async call.
-      // const standardColumns = [
-      //   'id',
-      //   'createdAt',
-      //   'updatedAt',
-      //   'deletedAt'
-      // ];
-      // const describe = await database[Model].describe();
-      // const columns = Object.keys(describe);
-      // const nonStandardColumns = columns.filter(column => !standardColumns.includes(column));
+      const columns = Object.keys(database[Model].rawAttributes);
+      const nonStandardColumns = columns.filter(column => !standardColumns.includes(column));
 
       const controller = {
+
+        add: async (req, res) => {
+          let item = {};
+          try {
+            for(const column of nonStandardColumns){
+              if(req.body[column] !== undefined){
+                item[column] = req.body[column];
+              }
+            }
+            await database[Model].create(item);
+            res.status(201).json();
+          } catch (error) {
+            if (error instanceof InvalidArgumentError) {
+              res.status(422).json({ error: error.message });
+            } else if (error instanceof InternalServerError) {
+              res.status(500).json({ error: error.message });
+            } else {
+              res.status(500).json({ error: error.message });
+            }
+          }
+        },
+
+        update: async (req, res) => {
+          try {
+            const item = await database[Model].findByPk(req.params.id);
+            for(const column of nonStandardColumns){
+              if(req.body[column] !== undefined){
+                item[column] = req.body[column];
+              }
+            }
+            await item.save();
+            res.status(204).json();
+          } catch (error) {
+            if (error instanceof InvalidArgumentError) {
+              res.status(422).json({ error: error.message });
+            } else if (error instanceof InternalServerError) {
+              res.status(500).json({ error: error.message });
+            } else {
+              res.status(500).json({ error: error.message });
+            }
+          }
+        },
 
         findByPk: async (req, res) => {
           const item = await database[Model].findByPk(req.params.id);
@@ -63,7 +104,7 @@ fs
           }
         }
       };
-      controllers[model] = { ...controllers[model], ...controller};
+      controllers[model] = {  ...controller, ...controllers[model]};
     });
 
 module.exports = controllers;

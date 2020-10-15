@@ -24,9 +24,9 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
-      hashedPassword: {
+      password: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
       },
       roleId: {
         type: Sequelize.INTEGER,
@@ -56,7 +56,7 @@ module.exports = {
       name: 'Diogo Bratti',
       email: 'dbratti@gmail.com',
       username: 'dbratti',
-      hashedPassword: hashedPassword,
+      password: hashedPassword,
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()

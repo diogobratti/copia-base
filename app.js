@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-const { authStrategy } = require('./auth');
+const { strategy } = require('./auth');
 
 app.use(
   bodyParser.urlencoded({

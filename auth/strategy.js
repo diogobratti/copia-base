@@ -32,18 +32,15 @@ async function verifyPassword(password, passwordHash) {
 passport.use(
   new LocalStrategy(
     {
-      usernameField: 'email',
-      passwordField: 'password',
+      // usernameField: 'username',
+      // passwordField: 'password',
       session: false
     },
-    async (email, password, done) => {
+    async (username, password, done) => {
       try {
-        const user = await model.User.findOne({ where : { email : email }});
+        const user = await model.User.findOne({ where : { username : username }});
         verifyUser(user);
-        
-        // await verifyPassword(password, user.getDataValue('hashedPassword'));
-        await verifyPassword(password, user.hashedPassword);
-
+        await verifyPassword(password, user.password);
         done(null, user);
       } catch (error) {
         done(error);

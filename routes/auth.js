@@ -6,12 +6,12 @@ module.exports = app => {
     .route('/auth/login')
     .post(
       middlewares.local,
-      controllers.user.login
+      controllers.auth.login
     );
   app
     .route('/auth/logout')
     .get(
       middlewares.bearer,
-      controllers.user.logout
+      controllers.auth.logout
     );
 };
