@@ -1,4 +1,6 @@
 'use strict';
+const bcrypt = require('bcrypt');
+const generalConfig = require('../config')["general"];
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Users', {
@@ -49,11 +51,12 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+    const hashedPassword = await bcrypt.hash('123456789', generalConfig.bcryptRounds)
     await queryInterface.bulkInsert('Users', [{
       name: 'Diogo Bratti',
       email: 'dbratti@gmail.com',
       username: 'dbratti',
-      hashedPassword: '123456789',
+      hashedPassword: hashedPassword,
       roleId: 1,
       createdAt: new Date(),
       updatedAt: new Date()

@@ -10,7 +10,7 @@ const blacklist = require('../redis/blacklist-actions');
 const i18n = require('../i18n/texts')
 
 function verifyUser(user) {
-  if (!user) {
+  if (user === null) {
     throw new InvalidArgumentError(i18n.USER_NOT_FOUND);
   }
 }

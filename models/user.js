@@ -5,6 +5,7 @@ const {
 const { InvalidArgumentError } = require('../error/error');
 const validation = require('../validation/validation-commom');
 const bcrypt = require('bcrypt');
+const generalConfig = require('../config')["general"];
 
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -48,9 +49,8 @@ module.exports = (sequelize, DataTypes) => {
     validation.notNullStringField(password, 'password');
     validation.minimumSizeField(password, 'password', 8);
     validation.maximumSizeField(password, 'password', 64);
-    const rounds = 12;
     return bcrypt
-      .hash(password, rounds)
+      .hash(password, generalConfig.bcryptRounds)
       .then(hash => (instance.setDataValue('hashedPassword', hash)));
   }
   User.beforeCreate(hashPasswordHook);
