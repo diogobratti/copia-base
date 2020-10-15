@@ -22,19 +22,4 @@ module.exports = {
       }
     }
   },
-
-  list: async (req, res) => {
-    const states = await database.State.findAll();
-    res.json(states);
-  },
-
-  delete: async (req, res) => {
-    const state = await database.State.findByPk(req.params.id);
-    try {
-      await state.destroy(state);
-      res.status(200).send();
-    } catch (error) {
-      res.status(500).json({ error: error });
-    }
-  }
 };

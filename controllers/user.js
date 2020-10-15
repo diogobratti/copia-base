@@ -2,13 +2,14 @@ const jwt = require('jsonwebtoken');
 const database = require('./../models');
 const { InvalidArgumentError, InternalServerError } = require('../error/error');
 const blacklist = require('../redis/blacklist-actions');
+const generalConfig = require('../config')["general"];
 
 function createJWTToken(user){
   const payload = {
     id: user.id
   }
 
-  const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: "15m" })
+  const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: generalConfig.timeToExpireToken })
   return token
 }
 
@@ -52,19 +53,4 @@ module.exports = {
       res.status(500).json({ error: error });
     }
   },
-
-  list: async (req, res) => {
-    const users = await database.User.findAll();
-    res.json(users);
-  },
-
-  delete: async (req, res) => {
-    const user = await database.User.findByPk(req.params.id);
-    try {
-      await user.destroy(user);
-      res.status(200).send();
-    } catch (error) {
-      res.status(500).json({ error: error });
-    }
-  }
 };

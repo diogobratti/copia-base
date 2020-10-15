@@ -22,19 +22,4 @@ module.exports = {
       }
     }
   },
-
-  list: async (req, res) => {
-    const roles = await database.Role.findAll();
-    res.json(roles);
-  },
-
-  delete: async (req, res) => {
-    const role = await database.Role.findByPk(req.params.id);
-    try {
-      await role.destroy(role);
-      res.status(200).send();
-    } catch (error) {
-      res.status(500).json({ error: error });
-    }
-  }
 };

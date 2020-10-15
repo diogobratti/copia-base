@@ -23,19 +23,4 @@ module.exports = {
       }
     }
   },
-
-  list: async (req, res) => {
-    const countries = await database.Country.findAll();
-    res.json(countries);
-  },
-
-  delete: async (req, res) => {
-    const country = await database.Country.findByPk(req.params.id);
-    try {
-      await country.destroy(country);
-      res.status(200).send();
-    } catch (error) {
-      res.status(500).json({ error: error });
-    }
-  }
 };

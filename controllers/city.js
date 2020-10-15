@@ -22,19 +22,4 @@ module.exports = {
       }
     }
   },
-
-  list: async (req, res) => {
-    const cities = await database.City.findAll();
-    res.json(cities);
-  },
-
-  delete: async (req, res) => {
-    const city = await database.City.findByPk(req.params.id);
-    try {
-      await city.destroy(city);
-      res.status(200).send();
-    } catch (error) {
-      res.status(500).json({ error: error });
-    }
-  }
 };
