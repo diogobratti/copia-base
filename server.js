@@ -3,7 +3,7 @@ const app = require('./app');
 require('./redis/blacklist')
 
 
-const port = (process.env.PORT ? process.env.PORT : 3000);
+const port = (process.env.PORT ? process.env.PORT : 3333);
 
 const routes = require('./routes');
 routes(app);
