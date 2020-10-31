@@ -38,7 +38,10 @@ passport.use(
     },
     async (username, password, done) => {
       try {
-        const user = await model.User.findOne({ where : { username : username }});
+        const user = await model.User.findOne({ 
+          // attributes : [ 'id', 'name', 'email', 'username', 'password', 'RoleId' ],
+          where : { username : username }
+        });
         verifyUser(user);
         await verifyPassword(password, user.password);
         done(null, user);

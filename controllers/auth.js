@@ -18,7 +18,11 @@ module.exports = {
   login: (req, res) => {
     const token = createJWTToken(req.user);
     res.set('Authorization', token);
-    res.status(204).send();
+    const body = {
+      token: token,
+      user: req.user
+    }
+    res.json(body);
   },
 
   logout: async (req, res) => {
