@@ -17,6 +17,9 @@ module.exports = {
       complement: {
         type: Sequelize.STRING
       },
+      neighborhood: {
+        type: Sequelize.STRING
+      },
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,

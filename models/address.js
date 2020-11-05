@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     number: DataTypes.STRING,
     complement: DataTypes.STRING,
+    neighborhood: DataTypes.STRING,
     zip: {
       type: DataTypes.STRING,
       allowNull: false,

@@ -28,6 +28,21 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
       },
+      allowExtraEmails: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      allowExtraWhatsapp: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+      termsAccepted: {
+        type: Sequelize.DATE,
+        allowNull: true,
+        defaultValue: Sequelize.NOW,
+      },
       roleId: {
         type: Sequelize.INTEGER,
         allowNull: false,

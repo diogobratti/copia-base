@@ -27,7 +27,15 @@ module.exports = {
       }
     });
     await queryInterface.bulkInsert('Roles', [{
-      label: 'admin',
+      label: 'global admin',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      label: 'local admin',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
+      label: 'client',
       createdAt: new Date(),
       updatedAt: new Date()
     }]);

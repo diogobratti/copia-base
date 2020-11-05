@@ -39,7 +39,22 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(64),
       allowNull: true,
       is: /^[0-9a-f]{64}$/i
-    }
+    },
+    allowExtraEmails: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+    allowExtraWhatsapp: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+    termsAccepted: {
+      type: DataTypes.DATE,
+      allowNull: true,
+      defaultValue: sequelize.NOW,
+    },
   }, {
     sequelize,
     modelName: 'User',

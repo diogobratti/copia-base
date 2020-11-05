@@ -1,5 +1,5 @@
 const controllers = require('../controllers');
-const middlewares = require('./../auth/middleware')
+const middlewares = require('./../auth/middleware');
 
 module.exports = app => {
   app
