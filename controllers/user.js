@@ -1,8 +1,5 @@
-const jwt = require('jsonwebtoken');
 const database = require('../models');
 const { InvalidArgumentError, InternalServerError } = require('../error/error');
-const blacklist = require('../redis/blacklist-actions');
-const generalConfig = require('../config')["general"];
 
 
 module.exports = {
@@ -45,4 +42,6 @@ module.exports = {
             }
         }
     },
+
+
 };
