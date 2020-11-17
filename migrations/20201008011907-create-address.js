@@ -59,6 +59,18 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
+    await queryInterface.bulkInsert('Addresses', [{
+      street: 'Rua dos Bobos',
+      userId: 1,
+      cityId: 4506,
+      main: true,
+      zip: '880752920',
+      number: '666',
+      complement: 'apto 00',
+      neighborhood: 'Estreito',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    }]);
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Addresses');

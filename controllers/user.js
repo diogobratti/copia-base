@@ -13,7 +13,7 @@ module.exports = {
             password: req.body.password,
             allowExtraEmails: req.body.allowExtraEmails,
             allowExtraWhatsapp: req.body.allowExtraWhatsapp,
-            termsAccepted: (req.body.terms ? database.NOW : null),
+            termsAccepted: (req.body.termsAccepted ? database.NOW : null),
             RoleId: 3,//client
         };
         let address = {
