@@ -74,7 +74,9 @@ module.exports = {
       password: hashedPassword,
       roleId: 1,
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      termsAccepted: new Date(),
+      allowExtraEmails: true
     }]);
   },
   down: async (queryInterface, Sequelize) => {

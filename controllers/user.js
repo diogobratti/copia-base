@@ -22,7 +22,7 @@ module.exports = {
             number: req.body.number,
             complement: req.body.complement,
             neighborhood: req.body.neighborhood,
-            CityId: req.body.city,
+            CityId: req.body.CityId,
             main: true,
         };
         try {
