@@ -31,6 +31,10 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
     },{
+      label: 'group admin',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },{
       label: 'local admin',
       createdAt: new Date(),
       updatedAt: new Date()
