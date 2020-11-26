@@ -1,27 +1,33 @@
-const jwt = require('jsonwebtoken');
-const database = require('../models');
-const { InvalidArgumentError, InternalServerError } = require('../error/error');
-const blacklist = require('../redis/blacklist-actions');
-const generalConfig = require('../config')["general"];
+const jwt = require("jsonwebtoken");
+const database = require("../models");
+const { InvalidArgumentError, InternalServerError } = require("../error/error");
+const blacklist = require("../redis/blacklist-actions");
+const generalConfig = require("../config")["general"];
 
-function createJWTToken(user){
+function createJWTToken(user) {
   const payload = {
-    id: user.id
-  }
+    id: user.id,
+  };
 
-  const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: generalConfig.timeToExpireToken })
-  return token
+  const token = jwt.sign(payload, process.env.JWT_KEY, {
+    expiresIn: generalConfig.timeToExpireToken,
+  });
+  return token;
 }
 
 module.exports = {
-
-  login: (req, res) => {
-    const token = createJWTToken(req.user);
-    res.set('Authorization', token);
+  basicLogin: (user) => {
+    const token = createJWTToken(user);
     const body = {
       token: token,
-      user: req.user
-    }
+      user: req.user,
+    };
+    return body;
+  },
+
+  login: (req, res) => {
+    const body = basicLogin(req.user);
+    res.set("Authorization", body.token);
     res.json(body);
   },
 

@@ -3,7 +3,7 @@ const {
   Model
 } = require('sequelize');
 const { InvalidArgumentError } = require('../error/error');
-const validation = require('../validation/validation-commom');
+const validation = require('../validation/validationCommom');
 const bcrypt = require('bcrypt');
 const generalConfig = require('../config')["general"];
 
@@ -35,6 +35,11 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
+    },
+    phone: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      unique: false
     },
     password: {
       type: DataTypes.STRING(64),

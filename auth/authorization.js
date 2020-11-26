@@ -2,8 +2,38 @@ const i18n = require('../i18n/texts');
 const database = require('./../models');
 
 module.exports = {
-    isAdmin: (req, res, next) => {
+    isGlobalAdmin: (req, res, next) => {
         if(req.user.dataValues.RoleId === 1){
+            next();
+            return;
+        } else {
+            res.status(403).send({
+                message: i18n.UNAUTHORIZED_ACTION
+            });
+        }
+    },
+    isGroupAdmin: (req, res, next) => {
+        if(req.user.dataValues.RoleId === 2){
+            next();
+            return;
+        } else {
+            res.status(403).send({
+                message: i18n.UNAUTHORIZED_ACTION
+            });
+        }
+    },
+    isLocalAdmin: (req, res, next) => {
+        if(req.user.dataValues.RoleId === 3){
+            next();
+            return;
+        } else {
+            res.status(403).send({
+                message: i18n.UNAUTHORIZED_ACTION
+            });
+        }
+    },
+    isClient: (req, res, next) => {
+        if(req.user.dataValues.RoleId === 4){
             next();
             return;
         } else {

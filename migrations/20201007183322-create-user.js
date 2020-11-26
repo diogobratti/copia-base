@@ -24,6 +24,11 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      phone: {
+        type: Sequelize.STRING,
+        allowNull: true,
+        unique: false,
+      },
       password: {
         type: Sequelize.STRING,
         allowNull: true,
@@ -71,6 +76,7 @@ module.exports = {
       name: 'Diogo Bratti',
       email: 'dbratti@gmail.com',
       username: 'dbratti',
+      phone: '(48) 99951-8667',
       password: hashedPassword,
       roleId: 1,
       createdAt: new Date(),

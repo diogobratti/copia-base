@@ -1,5 +1,6 @@
 const database = require('../models');
 const { InvalidArgumentError, InternalServerError } = require('../error/error');
+const authController = require('./auth');
 
 
 module.exports = {
@@ -11,6 +12,7 @@ module.exports = {
             email: req.body.email,
             username: req.body.username,
             password: req.body.password,
+            phone: req.body.phone,
             allowExtraEmails: req.body.allowExtraEmails,
             allowExtraWhatsapp: req.body.allowExtraWhatsapp,
             termsAccepted: (req.body.termsAccepted ? database.NOW : null),
@@ -31,7 +33,9 @@ module.exports = {
             console.log(newUser);
             console.log(address);
             let newAddress = await database.Address.create(address);
-            res.status(201).json();
+            const body = authController.basicLogin(newUser);
+            res.set("Authorization", body.token);
+            res.status(201).json(body);
         } catch (error) {
             if (error instanceof InvalidArgumentError) {
                 res.status(422).json({ error: error.message });
