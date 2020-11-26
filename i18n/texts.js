@@ -1,7 +1,6 @@
 module.exports = {
-    LOGIN_INVALID : 'Não existe usuário com esse e-mail!',
     TOKEN_INVALID : 'Token inválido por logout!',
-    USER_NOT_FOUND : 'E-mail ou senha inválidos!',
+    LOGIN_INVALID : 'Usuário ou senha inválidos!',
     ADD_USER_ERROR : 'Erro ao adicionar o usuário!',
     USER_NOT_FOUND : 'Não foi possível encontrar o usuário!',
     USER_LIST_ERROR : 'Erro ao listar usuários',
