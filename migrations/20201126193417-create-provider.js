@@ -20,6 +20,16 @@ module.exports = {
       email: {
         type: Sequelize.STRING
       },
+      categoryId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Categories',
+          key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -38,6 +48,7 @@ module.exports = {
       agent: 'Machado de Assis',
       phone: '48 98765-4321',
       email: 'email@email.com',
+      categoryId: 3,
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -45,6 +56,7 @@ module.exports = {
       agent: 'Monteiro Lobato',
       phone: '48 98765-4321',
       email: 'email@email.com',
+      categoryId: 4,
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -52,6 +64,7 @@ module.exports = {
       agent: 'Saci Perere',
       phone: '48 98765-4321',
       email: 'email@email.com',
+      categoryId: 2,
       createdAt: new Date(),
       updatedAt: new Date()
     },]);

@@ -5,5 +5,6 @@ module.exports = (app) => {
   app.route(public_path + "/error/notify").post(controllers.error.notify);
   app.route(public_path + "/address/getZip").get(controllers.address.getZip);
   app.route(public_path + "/state/listWithCities").get(controllers.state.listWithCities);
-  app.route(public_path + '/product/listByCategory/:id').get(controllers.product.listByCategory)
+  app.route(public_path + '/provider/listByParam/:param/:paramValue/numberOfRows/:numberOfRows/lastItemId/:lastItemId').get(controllers.provider.listByParam)
+  app.route(public_path + '/product/listByParam/:param/:paramValue/numberOfRows/:numberOfRows/lastItemId/:lastItemId').get(controllers.product.listByParam)
 };

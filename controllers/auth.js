@@ -7,6 +7,7 @@ const generalConfig = require("../config")["general"];
 function createJWTToken(user) {
   const payload = {
     id: user.id,
+    RoleId: user.RoleId,
   };
 
   const token = jwt.sign(payload, process.env.JWT_KEY, {
@@ -14,16 +15,17 @@ function createJWTToken(user) {
   });
   return token;
 }
+function basicLogin(user) {
+  const token = createJWTToken(user);
+  const body = {
+    token: token,
+    user: user,
+  };
+  return body;
+}
 
 module.exports = {
-  basicLogin: (user) => {
-    const token = createJWTToken(user);
-    const body = {
-      token: token,
-      user: req.user,
-    };
-    return body;
-  },
+  basicLogin: basicLogin,
 
   login: (req, res) => {
     const body = basicLogin(req.user);
