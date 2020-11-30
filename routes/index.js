@@ -34,8 +34,8 @@ module.exports = (app) => {
       let adminAccess = [
         middleware.bearer,
         authorization.isGlobalAdmin,
-        authorization.isGroupAdmin,
-        authorization.isLocalAdmin,
+        // authorization.isGroupAdmin,
+        // authorization.isLocalAdmin,
       ];
       let adminOrMyAccess = [];
       if (model === "user") {

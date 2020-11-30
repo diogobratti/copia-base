@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.City.belongsTo(models.State);
       models.City.hasMany(models.Address);
+      models.City.hasMany(models.Provider);
     }
   };
   City.init({

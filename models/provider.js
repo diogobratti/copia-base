@@ -13,13 +13,19 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.Provider.hasMany(models.Product);
       models.Provider.belongsTo(models.Category);
+      models.Provider.belongsTo(models.City);
     }
   };
   Provider.init({
     name: DataTypes.STRING,
     agent: DataTypes.STRING,
     phone: DataTypes.STRING,
-    email: DataTypes.STRING
+    email: DataTypes.STRING,
+    isStarred: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    },
   }, {
     sequelize,
     modelName: 'Provider',
