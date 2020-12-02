@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       models.Product.belongsTo(models.Category);
       models.Product.belongsTo(models.Provider);
+      models.Product.belongsTo(models.ProductGroup);
     }
   };
   Product.init({
@@ -21,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
     purchasePrice: DataTypes.FLOAT,
     salePrice: DataTypes.FLOAT,
     promotionalSalePrice: DataTypes.FLOAT,
-    quantity: DataTypes.INTEGER
+    quantity: DataTypes.INTEGER,
+    size: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Product',

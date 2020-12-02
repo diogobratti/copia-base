@@ -26,6 +26,9 @@ module.exports = {
       quantity: {
         type: Sequelize.INTEGER
       },
+      size: {
+        type: Sequelize.STRING
+      },
       categoryId: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -41,6 +44,16 @@ module.exports = {
         allowNull: false,
         references: {
           model: 'Providers',
+          key: 'id'
+        },
+        onUpdate: 'cascade',
+        onDelete: 'cascade'
+      },
+      productGroupId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'ProductGroups',
           key: 'id'
         },
         onUpdate: 'cascade',
@@ -66,8 +79,10 @@ module.exports = {
       salePrice: 200.00,
       promotionalSalePrice: 150.00,
       quantity: null,
+      size: 'Grande',
       categoryId: 3,
       providerId: 1,
+      productGroupId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -77,8 +92,10 @@ module.exports = {
       salePrice: 210.00,
       promotionalSalePrice: 110.00,
       quantity: null,
+      size: 'Médio',
       categoryId: 3,
       providerId: 1,
+      productGroupId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -87,9 +104,11 @@ module.exports = {
       purchasePrice: 100.00,
       salePrice: 200.00,
       promotionalSalePrice: 150.00,
+      size: 'Aberto',
       quantity: null,
       categoryId: 4,
       providerId: 2,
+      productGroupId: 1,
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -99,8 +118,10 @@ module.exports = {
       salePrice: 200.00,
       promotionalSalePrice: 150.00,
       quantity: 5,
+      size: 'G',
       categoryId: 5,
       providerId: 3,
+      productGroupId: 3,
       createdAt: new Date(),
       updatedAt: new Date()
     },{
@@ -110,8 +131,10 @@ module.exports = {
       salePrice: 200.00,
       promotionalSalePrice: 150.00,
       quantity: 20,
+      size: 'P',
       categoryId: 6,
       providerId: 3,
+      productGroupId: 4,
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
