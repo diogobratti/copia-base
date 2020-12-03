@@ -49,30 +49,30 @@ module.exports = {
       categoryId: null,
       createdAt: new Date(),
       updatedAt: new Date()
-    },{
-      name: 'Mexicana',
-      level: 2,
-      categoryId: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },{
-      name: 'Fast Food',
-      level: 2,
-      categoryId: 1,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },{
-      name: 'Masculina',
-      level: 2,
-      categoryId: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },{
-      name: 'Feminina',
-      level: 2,
-      categoryId: 2,
-      createdAt: new Date(),
-      updatedAt: new Date()
+    // },{
+    //   name: 'Mexicana',
+    //   level: 2,
+    //   categoryId: 1,
+    //   createdAt: new Date(),
+    //   updatedAt: new Date()
+    // },{
+    //   name: 'Fast Food',
+    //   level: 2,
+    //   categoryId: 1,
+    //   createdAt: new Date(),
+    //   updatedAt: new Date()
+    // },{
+    //   name: 'Masculina',
+    //   level: 2,
+    //   categoryId: 2,
+    //   createdAt: new Date(),
+    //   updatedAt: new Date()
+    // },{
+    //   name: 'Feminina',
+    //   level: 2,
+    //   categoryId: 2,
+    //   createdAt: new Date(),
+    //   updatedAt: new Date()
     },]);
   },
   down: async (queryInterface, Sequelize) => {

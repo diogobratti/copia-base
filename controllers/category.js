@@ -4,7 +4,12 @@ const { InvalidArgumentError, InternalServerError } = require("../error/error");
 module.exports = {
   listWithProvider: async (req, res) => {
     try {
+      let where = {};
+      if (req.params.id) {
+        where = { where: { id: req.params.id } };
+      }
       const categories = await database.Category.findAll({
+        ...where,
         include: { model: database.Provider, required: true },
       });
       res.json(categories);
