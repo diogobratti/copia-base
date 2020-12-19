@@ -1,6 +1,7 @@
 require('dotenv').config();
 const app = require('./app');
-require('./redis/blacklist')
+// require('./redis/blacklist')
+require('./redis');
 
 
 const port = (process.env.PORT ? process.env.PORT : 3333);

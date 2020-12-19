@@ -1,6 +1,6 @@
 const controllers = require("../controllers");
-const { authorization, middleware } = require("../auth");
+const { authorization, authentication } = require("../auth");
 
 module.exports = (app) => {
-  app.route("/checkout").post(middleware.bearer, controllers.auth.login);
+  app.route("/checkout").post(authentication.bearer, controllers.auth.login);
 };

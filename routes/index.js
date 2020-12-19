@@ -5,7 +5,7 @@ const path = require("path");
 const basename = path.basename(__filename);
 const routes = {};
 const controllers = require("../controllers");
-const { middleware, authorization } = require("../auth");
+const { authentication, authorization } = require("../auth");
 
 const private_path = '/private';
 
@@ -32,27 +32,27 @@ module.exports = (app) => {
       const model = file.slice(0, -3);
 
       let adminAccess = [
-        middleware.bearer,
-        authorization.isGlobalAdmin,
+        authentication.bearer,
+        // authorization.isGlobalAdmin,
         // authorization.isGroupAdmin,
         // authorization.isLocalAdmin,
       ];
       let adminOrMyAccess = [];
       if (model === "user") {
         adminOrMyAccess = [
-          middleware.bearer,
+          authentication.bearer,
           ...adminAccess,
-          authorization.isMyUser,
+          // authorization.isMyUser,
         ];
       } else if (model === "address") {
         adminOrMyAccess = [
-          middleware.bearer,
+          authentication.bearer,
           ...adminAccess,
-          authorization.isMyAddress,
+          // authorization.isMyAddress,
         ];
-        adminAccess = [middleware.bearer];
+        adminAccess = [authentication.bearer];
       } else {
-        adminOrMyAccess = [middleware.bearer, ...adminAccess];
+        adminOrMyAccess = [authentication.bearer, ...adminAccess];
       }
 
       app

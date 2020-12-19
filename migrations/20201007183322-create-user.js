@@ -19,6 +19,11 @@ module.exports = {
         allowNull: false,
         unique: true,
       },
+      emailVerified:{
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
       username: {
         type: Sequelize.STRING,
         allowNull: false,
@@ -28,6 +33,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: true,
         unique: false,
+      },
+      phoneVerified:{
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
       },
       password: {
         type: Sequelize.STRING,
@@ -79,6 +89,8 @@ module.exports = {
       phone: '(48) 99951-8667',
       password: hashedPassword,
       roleId: 1,
+      emailVerified: true,
+      phoneVerified: true,
       createdAt: new Date(),
       updatedAt: new Date(),
       termsAccepted: new Date(),
