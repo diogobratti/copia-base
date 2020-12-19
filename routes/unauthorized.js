@@ -8,12 +8,10 @@ module.exports = (app) => {
     .route(public_path + "/state/listWithCities")
     .get(controllers.state.listWithCities);
 
-
-
-    app
+  app
     .route(public_path + "/category/listWithProvider/:id")
     .get(controllers.category.listWithProvider);
-    app
+  app
     .route(public_path + "/category/listWithProvider")
     .get(controllers.category.listWithProvider);
 
@@ -21,9 +19,9 @@ module.exports = (app) => {
     .route(public_path + "/provider/listStarred")
     .get(controllers.provider.listStarred);
 
-    app
-      .route(public_path + "/provider/listWhereCategory/:categoryId")
-      .get(controllers.provider.listWhereCategory);
+  app
+    .route(public_path + "/provider/listWhereCategory/:categoryId")
+    .get(controllers.provider.listWhereCategory);
   app
     .route(
       public_path +
