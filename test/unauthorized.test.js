@@ -1,42 +1,8 @@
 const config = require("./config.json");
-const Axios = require("./Axios");
-const public_path = "/public";
-const get = async (url) => {
-  // try {
-  return await Axios.get(public_path + url);
-  // } catch (error) {
-  //   console.log(error);
-  // }
-};
-const post = async (url, params) => {
-  // try {
-  return await Axios.post(public_path + url, params);
-  // } catch (error) {
-  //   console.log(error);
-  // }
-};
-const postMethodTests = [
-//   {
-//     //   name: "",
-//     url: "",
-//     params: {},
-//     result: {},
-//   },
-//   {
-//     url: "/user/signUp",
-//     params: {},
-//   },
-  {
-    url: "/error/notify",
-    params: {
-        error: "Test",
-        localStorage: null,
-        url: "test url",
-        UserId: 1,
-    },
-    responseStatus: 201,
-  },
-];
+const { publicPost, publicGet } = require("./Axios");
+const { generate } = require("gerador-validador-cpf");
+const faker = require("faker");
+
 const getMethodTests = [
   //   {
   //     //   name: "",
@@ -85,8 +51,8 @@ const getMethodTests = [
   },
 ];
 getMethodTests.forEach((element) => {
-  test("Testing GET : " + public_path + element.url, async () => {
-    const response = await get(element.url);
+  test("Testing GET : " + config.PUBLIC_PATH + element.url, async () => {
+    const response = await publicGet(element.url);
     // console.log(response);
     expect(response).not.toBeNull();
     expect(response).not.toBeUndefined();
@@ -96,14 +62,71 @@ getMethodTests.forEach((element) => {
   });
 });
 
-postMethodTests.forEach((element) => {
-    test("Testing POST : " + public_path + element.url, async () => {
-      const response = await post(element.url, element.params);
-      console.log(response);
-      expect(response).not.toBeNull();
-      expect(response).not.toBeUndefined();
-      expect(response.status).not.toBeNull();
-      expect(response.status).not.toBeUndefined();
-      expect(response.status).toBe(element.responseStatus);
-    });
+test("Testing POST : /user/signUp", async () => {
+  const response = await publicPost("/user/signUp", {
+    StateId: 24,
+    id: null,
+    street: "Rua Ilha Sul",
+    number: "123",
+    complement: "apt 456",
+    neighborhood: "Campeche",
+    zip: "88065290",
+    main: true,
+    CityId: 4506,
+    UserId: null,
+    City: { StateId: "" },
+    RoleId: null,
+    name: faker.name.findName(),
+    username: generate(),
+    phone: "48987654321",
+    email: faker.internet.email(),
+    password: "123456789",
+    allowExtraEmails: true,
+    allowExtraWhatsapp: true,
+    createdAt: null,
+    deletedAt: null,
+    termsAccepted: "",
+    updatedAt: null,
+    Addresses: [
+      {
+        id: null,
+        street: "",
+        number: "",
+        complement: "",
+        neighborhood: "",
+        zip: "",
+        main: true,
+        CityId: "",
+        UserId: null,
+        City: { StateId: "" },
+      },
+    ],
   });
+  expect(response).not.toBeNull();
+  expect(response).not.toBeUndefined();
+  expect(response.status).not.toBeNull();
+  expect(response.status).not.toBeUndefined();
+  expect(response.status).toBe(201);
+  expect(response.data).not.toBeNull();
+  expect(response.data).not.toBeUndefined();
+  expect(response.data.accessToken).not.toBeNull();
+  expect(response.data.accessToken).not.toBeUndefined();
+  expect(response.data.refreshToken).not.toBeNull();
+  expect(response.data.refreshToken).not.toBeUndefined();
+  expect(response.data.user).not.toBeNull();
+  expect(response.data.user).not.toBeUndefined();
+});
+
+test("Testing POST : /error/notify", async () => {
+  const response = await publicPost("/error/notify", {
+    error: "Test",
+    localStorage: null,
+    url: "test url",
+    UserId: 1,
+  });
+  expect(response).not.toBeNull();
+  expect(response).not.toBeUndefined();
+  expect(response.status).not.toBeNull();
+  expect(response.status).not.toBeUndefined();
+  expect(response.status).toBe(201);
+});
