@@ -18,6 +18,7 @@ function createJWTToken(user, [timeQuantity, timeUnity]) {
   const token = jwt.sign(payload, process.env.JWT_KEY, {
     expiresIn: timeQuantity + timeUnity,
   });
+  
   return token;
 }
 

@@ -3,7 +3,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const BearerStrategy = require("passport-http-bearer").Strategy;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const tokens = require('./tokens');
+const tokens = require("./tokens");
 
 const { InvalidArgumentError } = require("../error/error");
 const model = require("../models");
@@ -24,9 +24,10 @@ function verifyUser(user) {
 //   }
 // }
 async function existsTokenInBlocklistAccessToken(token) {
-  const tokenNaBlocklistAccessToken = await blocklistAccessToken.existsToken(
+  const tokenNaBlocklistAccessToken = await blocklistAccessToken.hasToken(
     token
   );
+  console.log(tokenNaBlocklistAccessToken);
   if (tokenNaBlocklistAccessToken) {
     throw new jwt.JsonWebTokenError(i18n.TOKEN_INVALID);
   }
@@ -66,10 +67,8 @@ passport.use(
 passport.use(
   new BearerStrategy(async (token, done) => {
     try {
-      await existsTokenInBlocklistAccessToken(token);
-      // await existsTokenInBlacklist(token);
-      const payload = await tokens.access.verify(token);
-      const user = await model.User.findByPk(payload.id, {
+      const id = await tokens.access.verify(token);
+      const user = await model.User.findByPk(id, {
         include: { all: true, nested: true },
       });
       done(null, user, { token: token });

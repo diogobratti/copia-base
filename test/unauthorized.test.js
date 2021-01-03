@@ -80,7 +80,7 @@ test("Testing POST : /user/signUp", async () => {
     username: generate(),
     phone: "48987654321",
     email: faker.internet.email(),
-    password: "123456789",
+    password: config.PASSWORD_TEST,
     allowExtraEmails: true,
     allowExtraWhatsapp: true,
     createdAt: null,

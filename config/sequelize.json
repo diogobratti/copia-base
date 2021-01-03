@@ -21,9 +21,9 @@
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
+    "username": "sequelize",
+    "password": "Secret#123456",
+    "database": "sequelize",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },

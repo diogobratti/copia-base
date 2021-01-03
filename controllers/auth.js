@@ -79,7 +79,7 @@ module.exports = {
         throw Error(i18n.EMAIL_NOT_FOUND);
       }
         const token = await tokens.passwordChange.create(user);
-        const email = new EmailPasswordChange(usuario, token);
+        const email = new EmailPasswordChange(user, token);
         await email.sendEmail();
 
         res.send({ message: i18n.EMAIL_FORGOT_PASSWORD_SENT});
@@ -96,7 +96,7 @@ module.exports = {
       }
       const id = await tokens.passwordChange.verify(req.body.token);
       const user = await database.User.findByPk(id);
-      await user.password(req.body.password);
+      user.password = req.body.password;
       await user.save();
       res.send({ message: i18n.PASSWORD_CHANGED });
     } catch (error) {

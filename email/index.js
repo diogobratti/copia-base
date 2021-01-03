@@ -50,7 +50,7 @@ class EmailVerification extends Email {
 class EmailPasswordChange extends Email {
   constructor (user, token) {
     super();
-    this.from = process.emv.EMAIL_FROM;
+    this.from = process.env.EMAIL_FROM;
     this.to = user.email;
     this.subject = i18n.EMAIL_PASSWORD_CHANGE.SUBJECT;
     this.text = i18n.EMAIL_PASSWORD_CHANGE.TEXT(token);

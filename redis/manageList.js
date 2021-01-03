@@ -9,7 +9,7 @@ const manageList = list => {
   return {
     async add(key, value, expirationDate) {
       await setAsync(key, value);
-      list.expireAt(key, expirationDate);
+      list.expireat(key, expirationDate);
     },
 
     async searchValue(key) {

@@ -9,7 +9,7 @@ module.exports = (app) => {
   app.route("/auth/forgotMyPassword").post(controllers.auth.forgotMyPassword);
 
   app
-    .route("/auth/atualiza_token")
+    .route("/auth/refreshToken")
     .post(authentication.refresh, controllers.auth.login);
 
   app
