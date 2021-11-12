@@ -104,3 +104,7 @@ dist
 .tern-port
 
 *.sqlite
+
+my_backup_minimal_no_data.sql
+my_backup_minimal_data.sh
+my_backup_minimal_data.sql
