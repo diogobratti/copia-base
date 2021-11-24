@@ -1,8 +1,0 @@
-{
-    "BASE_URL": "http://localhost:3333",
-    "PUBLIC_PATH" : "/public",
-    "USERNAME_TEST" : "dbratti",
-    "EMAIL_TEST" : "dbratti@gmail.com",
-    "PASSWORD_TEST" : "123456789",
-    "NEW_PASSWORD_TEST" : "987654321"
-}

@@ -1,0 +1,25 @@
+version: '3'
+services:
+  apache:
+    build: 
+      dockerfile: ./docker/apache.dockerfile
+      context: .
+    container_name: apache
+    ports:
+      - "80:5580"
+      - "443:5543"
+    networks: 
+      - eproc-network
+  mysql:
+    build: 
+      dockerfile: ./docker/mysql.dockerfile
+      context: .
+    container_name: mysql
+    ports:
+      - "3306:5506"
+    networks: 
+      - eproc-network
+
+networks: 
+  eproc-network: 
+    driver: bridge
