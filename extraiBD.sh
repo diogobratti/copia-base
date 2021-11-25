@@ -49,7 +49,7 @@ mysql --host=$HOST \
             table_schema, ' ', table_name, ' ',
             '--no-create-db ',
             '--no-create-info ',
-            '--single-transaction --routines --events ',
+            '--single-transaction  ',
             '--no-tablespaces ',
             '>>bkp_dados.sql ',
             ' ')
@@ -73,7 +73,7 @@ mysql --host=$HOST \
             table_schema, ' ', table_name, ' ',
             '--no-create-db ',
             '--no-create-info ',
-            '--single-transaction --routines --events ',
+            '--single-transaction  ',
             '--no-tablespaces ',
             '>>bkp_dados.sql ',
             ' ')
