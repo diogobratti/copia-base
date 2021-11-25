@@ -34,7 +34,6 @@ mysqldump --host=$HOST \
 echo "\n SET FOREIGN_KEY_CHECKS = 1; \n" >> bkp_metadados.sql
 sed -i 's/10.17.43.92/localhost/g' bkp_metadados.sql
 
-rm bkp_dados.sh
 
 echo "echo \" use $BANCO1G; \" >> bkp_dados.sql " >> bkp_dados.sh
 
