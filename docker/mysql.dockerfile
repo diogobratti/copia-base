@@ -1,6 +1,6 @@
 FROM mysql:8.0.26
 MAINTAINER Diogo Bratti
-COPY /extractDbMinimal.sh /src/extractDbMinimal.sh
-RUN chmod 755 /src/extractDbMinimal.sh
-RUN ./src/extractDbMinimal.sh
+COPY /extraiBD.sh /src/extraiBD.sh
+RUN chmod 755 /src/extraiBD.sh
+RUN ./src/extraiBD.sh
 EXPOSE 3306
