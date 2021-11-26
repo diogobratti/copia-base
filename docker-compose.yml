@@ -14,9 +14,13 @@ services:
     build: 
       dockerfile: ./docker/mysql.dockerfile
       context: .
+    volumes:
+      - "./bd:/var/lib/mysql"
     container_name: mysql
     ports:
       - "3306:5506"
+    environment:
+      - MYSQL_ROOT_PASSWORD=eproc@tjsc
     networks: 
       - eproc-network
 
