@@ -7,4 +7,4 @@ COPY /bkp_metadados.sql /src/bkp_metadados.sql
 COPY /bkp_dados.sql /src/bkp_dados.sql
 RUN mysql --host=localhost --port=3306 --user=root --password=eproc@tjsc < /src/bkp_metadados.sql
 RUN mysql --host=localhost --port=3306 --user=root --password=eproc@tjsc < /src/bkp_dados.sql
-EXPOSE 3306
+EXPOSE 33060

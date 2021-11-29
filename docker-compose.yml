@@ -4,7 +4,7 @@ services:
     build: 
       dockerfile: ./docker/apache.dockerfile
       context: .
-    container_name: apache
+    container_name: testes-eproc-apache
     ports:
       - "80:5580"
       - "443:5543"
@@ -16,9 +16,9 @@ services:
       context: .
     volumes:
       - "./bd:/var/lib/mysql"
-    container_name: mysql
+    container_name: testes-eproc-mysql
     ports:
-      - "3306:5506"
+      - "33060:5506"
     environment:
       - MYSQL_ROOT_PASSWORD=eproc@tjsc
     networks: 
